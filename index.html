@@ -21,14 +21,14 @@
 				<!-- Template -->
 						<div id="products_section" ng-repeat="product in products">
 							<div class="products_page pg_0">
-								<div class="product product_horizontal">
+								<div class="product product_horizontal" ng-init="count=1">
 									<span class="product_code">Код: {{product.code}}</span>
 									<div class="product_status_tooltip_container">
 										<span class="product_status">Наличие</span>
 									</div>
 									<div class="product_photo">
 										<a href="#" class="url--link product__link">
-											<img src="{{product.primaryImageUrl}}">
+											<img ng-src="{{product.primaryImageUrl.slice(0, -4) + '_220x220_1.jpg'}}">
 										</a>
 									</div>
 									<div class="product_description">
@@ -45,17 +45,17 @@
 									</div>
 									<div class="product_units">
 										<div class="unit--wrapper" ng-init="active = 'areaFoo'">
-											<div class="unit--select" ng-class="{'unit--active':active == 'areaFoo'}" ng-click="active = 'areaFoo'">
+											<div class="unit--select" ng-class="{'unit--active':active == 'areaFoo'}" ng-click="active = 'areaFoo';" tometer>
 												<p class="ng-binding">За м. кв.</p>
 											</div>
-											<div class="unit--select" ng-class="{'unit--active':active == 'areaBar'}" ng-click="active = 'areaBar'">
+											<div class="unit--select" ng-class="{'unit--active':active == 'areaBar'}" ng-click="active = 'areaBar';" topackaging>
 												<p class="ng-binding" >За упаковку</p>
 											</div>
 										</div>
 									</div>
 									<p class="product_price_club_card">
 										<span class="product_price_club_card_text">По карте<br>клуба</span>
-										<span class="goldPrice">{{product.priceGold}}</span>
+										<span class="goldPrice" data-unit-price="{{product.priceGold}}" data-default-price="{{product.priceGoldAlt}}">{{product.priceGoldAlt}}</span>
 										<span class="rouble__i black__i">
                                         <svg version="1.0" id="rouble__b" xmlns="http://www.w3.org/2000/svg" x="0" y="0" width="30px" height="22px" viewBox="0 0 50 50" enable-background="new 0 0 50 50" xml:space="preserve">
                                            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#rouble_black"></use>
@@ -63,7 +63,7 @@
                                      </span>
 									</p>
 									<p class="product_price_default">
-										<span class="retailPrice">{{product.priceGoldAlt}}</span>
+										<span class="retailPrice" data-unit-price="{{product.priceRetail}}" data-default-price="{{product.priceRetailAlt}}">{{product.priceRetailAlt}}</span>
 										<span class="rouble__i black__i">
                                         <svg version="1.0" id="rouble__g" xmlns="http://www.w3.org/2000/svg" x="0" y="0" width="30px" height="22px" viewBox="0 0 50 50" enable-background="new 0 0 50 50" xml:space="preserve">
                                            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#rouble_gray"></use>
@@ -80,7 +80,7 @@
 											<div class="unit--desc-t">
 												<p>
 													<span class="ng-binding">Продается упаковками:</span>
-													<span class="unit--infoInn">1 упак. = 2.47 м. кв. </span>
+													<span class="unit--infoInn">{{count}} упак. = 2.47 м. кв. </span>
 												</p>
 											</div>
 										</div>
@@ -88,9 +88,9 @@
 									<div class="product__wrapper">
 										<div class="product_count_wrapper">
 											<div class="stepper">
-												<input class="product__count stepper-input" type="text" value="{{products.quantity}}">
-												<span class="stepper-arrow up" ng-click="quantityUp(product)"></span>
-												<span class="stepper-arrow down" ng-click="quantityDown(product)"></span>
+												<input class="product__count stepper-input" type="text"  value="{{count}}">
+												<span class="stepper-arrow up" up></span>
+												<span class="stepper-arrow down" down></span>
 											</div>
 										</div>
 										<span class="btn btn_cart" data-url="/cart/" data-product-id="9bf0afd7-5190-11e5-b9a9-00259036a192">
